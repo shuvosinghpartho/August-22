@@ -71,7 +71,7 @@
     }
 
     body::before {
-        content: "\00A9  Instagram | @aoudumber.dev";
+        /* content: "\00A9  Instagram | @aoudumber.dev"; */
         color: white;
         opacity: .05;
         font-size: 10px;
@@ -580,7 +580,7 @@
         <div id="kadoIn">
             <!-- Tombol Surat --><img src="./assets/kadoin.png" />
         </div>
-        <p id="ket">Click the Box!</p>
+        <p id="ket">Click The Gift!</p>
 
         <div class="kumpulanstiker">
             <!-- Stiker untuk Konten -->
@@ -610,13 +610,13 @@
 
                 <p id="pesan2">Wait...✨</p>
                 <!-- Pesan -->
-                <p id="pesan3">Hey.. it's your birthday! ❤</p>
-                <p id="pesan4">Happy Birthday DR. sresthasree sreya 🎉 ❤</p>
+                <p id="pesan4">Happy Birthday DR. sresthasree sreya 🎉 ❤❤</p>
+                <p id="pesan3">🥳 Another year, another reason to shine brighter!</p>
                 <p id="pesan5" class="gaya2">Getting older, getting cuter hehe</p>
                 <p id="pesan6" class="gaya2">Wishing you a long life, stay healthy ❤</p>
                 <p id="pesan7" class="gaya2">Hope your fortune keeps flowing, until you don't know how to spend it!</p>
 
-                <p id="pesan8" class="gaya2">Happy Birthday ❤️❤️.....</p>
+                <p id="pesan8" class="gaya2">💫 On your day, may all your dreams take flight❤️❤️.....</p>
                 <p id="pesan9" class="gaya2">Hope you’re happy on your special day, you must be happy! ❤</p>
                 <p id="pesan10" class="gaya2">Have a wonderful day.✨ Filled with joy and happiness. ❤</p>
 
@@ -685,11 +685,11 @@
                     await swals.fire('Okay!', `Now look at this ❤️`);
                     mulainama();
                 } else {
-                    await swals.fire('Okay, choosing Red!', 'It\'s actually the same, but if you choose Red, you have to treat me more! 藍');
+                    await swals.fire('Okay, choosing Red!', 'It\'s actually the same, but if you choose Red, you have to treat me more!');
                     mulainama();
                 }
             } else {
-                await swals.fire('Yeayy!', 'If you choose <b>Red</b>, you have to treat me! 藍');
+                await swals.fire('Yeayy!', 'If you choose <b>Red</b>, you have to treat me!');
                 var { isConfirmed: warna2 } = await swals.fire({
                     title: nama + ', are you sure you want Red?',
                     text: 'Or do you want to change the color?', showCancelButton: true,
@@ -697,7 +697,7 @@
                     cancelButtonText: 'Sure',
                 });
                 if (warna2) {
-                    await swals.fire('Okay, choosing Blue!', 'It\'s actually the same, but if you choose Blue, you have to treat me more! 藍');
+                    await swals.fire('Okay, choosing Blue!', 'It\'s actually the same, but if you choose Blue, you have to treat me more!');
                     mulainama();
                 } else {
                     await swals.fire('Okay!', `Now look at this`);
