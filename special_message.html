@@ -1,179 +1,482 @@
 <!DOCTYPE html>
-<html lang="bn"> <!-- Set language to Bengali -->
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/heart.jpg" type="image/icon type">
-    <title>A Special Message For You!</title>
+    <title>শুভ জন্মদিন শ্রেয়া ❤️</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap'); /* Added Kalam */
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Tangerine:wght@700&family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
+
+        :root {
+            --primary-pink: #e91e63;
+            --secondary-pink: #ff8fab;
+            --light-pink: #fce0e8;
+            --dark-pink: #c2185b;
+            --purple: #8a2a52;
+            --gold: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Noto Sans Bengali', 'Poppins', sans-serif; /* Added Noto Sans Bengali as primary */
-            background: linear-gradient(135deg, #fce0e8, #ffc0cb, #f8bbd0); /* Soft pink gradient */
-            color: #4A4A4A; /* Dark grey for readability */
+            font-family: 'Noto Sans Bengali', 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #fce0e8, #ffc0cb, #f8bbd0);
+            color: #4A4A4A;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23ff8fab33" d="M30,50 Q50,30 70,50 Q50,70 30,50 Z"/></svg>') repeat;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 50px auto; 
+            perspective: 1000px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .envelope-front {
+            background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2; 
+            transform-origin: bottom;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-align: center;
+            color: white;
+            height: 200px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
-            padding: 30px 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            max-width: 700px;
+        .envelope.open .envelope-front {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 200px; 
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            padding-top: 20px; 
+            padding-bottom: 20px;
+            opacity: 0;
+            pointer-events: none; 
+            transition: opacity 0.5s ease 0.4s, z-index 0s linear 0.9s; 
+        }
+
+        .envelope.open .envelope-back {
+            opacity: 1;
+            z-index: 3; 
+            pointer-events: auto; 
+            transition: opacity 0.5s ease 0.4s, z-index 0s linear 0s;
+        }
+
+
+        .letter {
+            background: linear-gradient(to bottom, #fff9f9, #fff);
             width: 90%;
-            border: 2px solid #ff8fab; /* Pink border */
-            animation: fadeInScale 1s ease-out forwards;
+            max-width: 700px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease 0.6s;
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            margin-top: 10px; 
+            margin-bottom: 10px;
         }
 
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            color: #e91e63; /* Deep pink */
-            font-size: 2.8em; /* Adjusted size */
-            margin-bottom: 25px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        .envelope.open .letter {
+            transform: translateY(0);
+            opacity: 1;
         }
 
-        /* Styles for your new classes */
+        .letter::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink), var(--gold));
+            border-radius: 10px 10px 0 0;
+        }
+
+        .letter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1.title {
+            font-family: 'Dancing Script', 'Tangerine', cursive;
+            color: var(--primary-pink);
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1.title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
+            border-radius: 3px;
+        }
+
         .message-paragraph {
-            font-family: 'Noto Sans Bengali', sans-serif; /* Ensure Bengali font */
-            font-size: 1.3em; /* Adjusted for Bengali script readability */
+            font-family: 'Noto Sans Bengali', sans-serif;
+            font-size: 1.2rem;
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #5c5c5c;
-            text-align: justify; /* Justify text for a cleaner look in paragraphs */
+            text-align: justify;
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid rgba(233, 30, 99, 0.1);
+            transition: all 0.3s ease; /* Ensures smooth transition for hover/active and back */
         }
 
-        .message-highlight {
-            font-weight: 500; /* Use Poppins for consistency or Noto Sans Bengali bold */
-            color: #d81b60; /* Another shade of pink */
-            font-family: 'Noto Sans Bengali', sans-serif;
-            font-weight: bold;
+        .message-paragraph:hover,
+        .message-paragraph:active { /* Added :active for touch devices */
+            border-left: 2px solid var(--secondary-pink);
+            background: rgba(255, 192, 203, 0.05);
+            padding-left: 25px;
         }
         
-        strong { /* General strong tag styling if used */
-            font-family: 'Noto Sans Bengali', sans-serif;
-            font-weight: bold;
-            color: #c2185b; /* Stronger pink */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            position: relative;
         }
 
-        .message-divider {
-            font-size: 2em; /* Adjusted size */
-            color: #ff8fab;
-            margin: 25px 0;
-            text-align: center;
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--secondary-pink), transparent);
         }
 
-        .message-ending {
-            font-family: 'Dancing Script', cursive; /* Or 'Kalam' if you prefer */
-            font-size: 1.8em; /* Adjusted size */
-            color: #e91e63;
-            margin-top: 30px;
-            text-align: right; /* Align signature to the right */
+        .divider-icon {
+            margin: 0 15px;
+            font-size: 1.8rem;
+            color: var(--primary-pink);
+            animation: pulse 2s infinite;
         }
 
-        /* Specific style for the quote as provided */
-        .quote-paragraph {
-            text-align: center !important; /* Ensure center alignment */
-            font-style: italic;
-            color: #8a2a52;
+        .quote {
             font-family: 'Kalam', cursive;
-            font-size: 1.4em; /* Slightly larger for emphasis */
-            margin-top: 25px;
-            margin-bottom: 25px;
+            font-size: 1.5rem;
+            color: var(--purple);
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            position: relative;
+            font-style: italic;
         }
 
+        .quote::before, .quote::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--secondary-pink);
+            position: absolute;
+        }
 
-        /* Simple animation for entry */
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
+        .quote::before { top: 0; left: 10px; }
+        .quote::after { bottom: -20px; right: 10px; }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--primary-pink);
+            text-align: right;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .signature::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            right: 0;
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary-pink));
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1; 
+        }
+
+        .heart {
+            position: absolute;
+            opacity: 0;
+            animation: float 6s ease-in infinite;
+            font-size: 20px;
+            color: var(--primary-pink);
+        }
+
+        .stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), #ffab00);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark-pink);
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transform: rotate(15deg);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border: 2px dashed var(--primary-pink);
+        }
+
+        .seal {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            transform: rotate(-20deg);
+            opacity: 0.8;
+            z-index: 2; 
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in { animation: fadeIn 1s ease forwards; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1.0s; }
+
+
+        @media (max-width: 768px) {
+            .letter { padding: 25px; }
+            h1.title { font-size: 2.8rem; }
+            .message-paragraph { font-size: 1.1rem; }
+            .quote { font-size: 1.3rem; }
+            .signature { font-size: 2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .letter { padding: 20px; }
+            h1.title { font-size: 2.2rem; }
+            .message-paragraph { font-size: 1rem; padding-left: 15px; } /* Base padding for mobile */
+            .message-paragraph:hover,
+            .message-paragraph:active {
+                padding-left: 20px; /* Adjusted hover/active padding for mobile if base is 15px */
             }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            .divider-icon { font-size: 1.5rem; }
+            .quote { font-size: 1.1rem; padding: 15px; }
+            .signature { font-size: 1.8rem; }
+            .stamp { width: 60px; height: 60px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>শুভ জন্মদিন শ্রেয়া ❤️❤️</h1> <!-- Bengali Title -->
-        
-        <p class="message-paragraph">
-            আজ তোমার এই বিশেষ দিনে, আকাশের প্রতিটি তারা যেন তোমার জন্য প্রার্থনা করছে।
-            গোবিন্দের চরণে এই প্রার্থনা - তোমার জীবনের প্রতিটি স্বপ্ন যেন পূর্ণ হয়,
-            প্রতিটি পদক্ষেপে যেন তিনি নিজে হাত বাড়িয়ে ধরেন।
-            <span class="message-highlight">শ্রীকৃষ্ণ তোমার জীবনকে তার মতোই মধুর করে তুলোক</span>।
-        </p>
+    <div class="floating-hearts" id="hearts"></div>
     
-        <div class="message-divider">🌸</div>
-    
-        <p class="message-paragraph">
-            জানি, আমি তোমার কাছে একজন অপরিচিত মানুষ। কিন্তু আশ্চর্য ব্যাপার,
-            এই এক বছরের কিছু বেশি সময় ধরে তুমি আমার দৈনন্দিনের একটি অংশ হয়ে উঠেছ।
-            হয়তো বিশ্বাস করবে না, কিন্তু এই অপরিচিত মানুষের কাছে তুমি হয়ে উঠেছো
-            একটি সুন্দর অনুভূতি - <span class="message-highlight">যেমন ভোরে শিশির ভেজা ফুলের গন্ধ,
-            যেমন সন্ধ্যায় মন্দিরের ঘণ্টাধ্বনি</span>।
-        </p>
-    
-        <p class="message-paragraph">
-            ভগবানের দর্শন সবার ভাগ্যে ঘটে না, কিন্তু তাঁর সৃষ্টির মাঝে যে সৌন্দর্য,
-            তা তো আমরা প্রতিদিন দেখি। তুমি যেন সেই সৌন্দর্যেরই একটি রূপ।
-            কিছু কথা হৃদয়ে লুকিয়ে রাখার মতো, আবার কিছু কথা বলা দরকার -
-            যাতে পরবর্তীতে আফসোস না থাকে যে বলা হয়নি।
-        </p>
-    
-        <p class="message-paragraph">
-            তোমার প্রতি এক অদ্ভুত টান অনুভব করি—নাম দেওয়া যায় না, কিন্তু প্রতিটা মুহূর্তে তার অস্তিত্ব টের পাই।
-            এই অনুভূতিটা ঠিক কবে থেকে, কীভাবে – সেটা হয়তো বলা যায় না, কিন্তু প্রতিবার তোমাকে দেখলে,
-            কথা বললে কিংবা নিঃশব্দে তোমার কথা ভাবলে মনে হয়—এই ভালো লাগা শুধু একটা মুহূর্তের নয়,
-            এটা যেন সময়কে ছুঁয়ে থাকা এক শান্ত কোমল স্রোত। আমি জানি না এই অনুভুতির ভবিষ্যৎ কোথায় যাবে,
-            আদৌ কোনো গন্তব্য আছে কিনা – কিন্তু আজ যা অনুভব করি, তা একটুও মিথ্যে নয়।
-        </p>
-    
-        <p class="message-paragraph">
-            তোমার সাথে জড়িয়ে থাকা ছোট ছোট মুহূর্তগুলো – হোক তা দেখা না-দেখা, বলা না-বলা –
-            আমার ভেতর এক রকম আলো রেখে যায়। সেগুলোই একদিন স্মৃতির পাতায় স্নিগ্ধ এক গল্প হয়ে থাকবে।
-        </p>
-    
-        <p class="message-paragraph">
-            গোবিন্দ যদি কোনো এক নিস্তব্ধ বিকেলে লিখে রাখেন—যেখানে আমরা এক সাথে এক আকাশের নিচে বসে আছি—তাহলে সেদিন,
-            নিশ্চয়ই, মন খুলে তোমাকে জানাবো আরও অনেক অপ্রকাশিত কথা, যা আজ শুধু হৃদয়ের গোপন কোণে জমে আছে।
-        </p>
-    
-        <div class="message-divider">🪔</div>
-    
-        <p class="message-paragraph quote-paragraph" 
-           style="text-align: center; font-style: italic; color: #8a2a52; font-family: 'Kalam', cursive;">
-            <!-- "জন্মদিন শুধু একটি দিন নয়, এটি মহাবিশ্বের তোমাকে স্মরণ করার দিন।" -->
-            
-
-            <span class="message-highlight">"জন্মদিন শুধু একটি দিন নয়, এটি মহাবিশ্বের তোমাকে স্মরণ করার দিন।"
-            </span>।
-
-        </p>
-    
-        <p class="message-paragraph">
-            আবারও অজস্র শুভেচ্ছা তোমাকে। তোমার জীবনের প্রতিটি দিন যেন
-            নতুন আশায়, নতুন স্বপ্নে ভরে ওঠে। তোমার পথচলা হোক সফল,
-            জীবন হোক সুন্দর ও অর্থপূর্ণ।
-        </p>
-    
-        <div class="message-ending">- পার্থ</div>
+    <div class="envelope" id="envelope">
+        <div class="envelope-front">
+            <h2 style="font-family: 'Noto Sans Bengali'; margin-bottom: 10px;">শ্রেয়ার জন্য বিশেষ বার্তা</h2>
+            <p style="font-family: 'Noto Sans Bengali';">খুলে দেখতে ক্লিক করুন ❤️</p>
+            <div class="stamp">প্রিয়</div>
+        </div>
+        <div class="envelope-back">
+            <div class="letter">
+                <div class="seal">❤️</div>
+                <div class="letter-content">
+                    <h1 class="title fade-in">শুভ জন্মদিন শ্রেয়া ❤️</h1>
+                    
+                    <p class="message-paragraph fade-in delay-1">
+                        আজ তোমার এই বিশেষ দিনে, আকাশের প্রতিটি তারা যেন তোমার জন্য প্রার্থনা করছে। গোবিন্দের চরণে আমার একটাই প্রার্থনা—তোমার জীবনের প্রতিটি স্বপ্ন যেন পূর্ণ হয়, প্রতিটি পদক্ষেপে যেন তিনি নিজে হাত বাড়িয়ে ধরেন। শ্রীকৃষ্ণ তোমার জীবনকে তার মতোই মধুর করে তুলুন।
+                    </p>
+                    
+                    <div class="divider fade-in delay-1"><div class="divider-icon">🌸</div></div>
+                    
+                    <p class="message-paragraph fade-in delay-2">
+                        জানি, আমি তোমার কাছে তেমন গুরুত্বপূর্ণ কেও না। কিন্তু আশ্চর্য ব্যাপার, এই এক বছরের কিছু বেশি সময় ধরে তুমি আমার দৈনন্দিনের একটি অনুভুতি হয়ে উঠেছো। হয়তো বিশ্বাস করবে না, কিন্তু আমার কাছে তুমি হয়ে উঠেছো একটি সুন্দর অনুভূতি—যেমন ভোরে শিশির ভেজা ফুলের গন্ধ, যেমন সন্ধ্যায় মন্দিরের ঘণ্টাধ্বনি।
+                    </p>
+                    
+                    <div class="divider fade-in delay-2"><div class="divider-icon">🌺</div></div>
+                    
+                    <p class="message-paragraph fade-in delay-3">
+                        Chemistry তে আমরা পড়েছি –প্রতিটা পরমাণু স্থিতিশীল হতে চায়। তার জন্য লাগে একটা পূর্ণ ভ্যালেন্স শেল, আর সে পূর্ণতা আসে ইলেকট্রন দিয়ে—কখনো কেউ ইলেকট্রন গ্রহণ করে, কেউবা আবার হারিয়ে ফেলে, শুধু একটু বেশি স্থিতির জন্য।
+                    </p>
+                    <p class="message-paragraph fade-in delay-3">
+                        আজ নিজেকে ভাবলে দেখি—আমি তো সেই অপূর্ণ এক পরমাণু খালি একটা ইলেকট্রনের অভাব আমাকে করে রাখে অস্থির, এক নিঃশব্দে কাঁপতে থাকা অস্তিত্ব।
+                    </p>
+                    <p class="message-paragraph fade-in delay-3">
+                        তুমি কি কখনও ভেবে দেখেছো—তুমিই বা কিভাবে স্থিতিশীল হবে?
+                        তুমি কি ইলেকট্রন গেইন করবে?
+                        নাকি হারাবে, কোনোটা?
+                        নাকি তুমি সেই এক ইলেকট্রনের খোঁজেই আছো যে তোমাকে করবে পূর্ণ, যাকে খুঁজে ফিরছো নিজের মধ্যে?
+                    </p>
+                    <p class="message-paragraph fade-in delay-3">আমি আমারটা পেয়ে গেছি।</p>
+                    <p class="message-paragraph fade-in delay-3">তুমি।</p>
+                    <p class="message-paragraph fade-in delay-3">
+                        তুমি আমার সেই একমাত্র ইলেকট্রন—যার জন্য আমি এখন স্থিতিশীল। আমার অস্তিত্বে তুমি যেভাবে এসে যুক্ত হয়েছো—তা যেন এক নিখুঁত কেমিক্যাল বন্ড। যেখানে ভালোবাসার ইন্টারঅ্যাকশনটাই সবচেয়ে শক্তিশালী শক্তি।
+                    </p>
+                    
+                    <div class="divider fade-in delay-3"><div class="divider-icon">🪔</div></div>
+                    
+                    <p class="message-paragraph fade-in delay-4">
+                        ভগবানের দর্শন সবার ভাগ্যে ঘটে না, কিন্তু তাঁর সৃষ্টির মাঝে যে সৌন্দর্য, তা তো আমরা প্রতিদিন দেখি। তুমি যেন সেই সৌন্দর্যেরই একটি রূপ। কিছু কথা হৃদয়ে লুকিয়ে রাখার মতো, আবার কিছু কথা বলা দরকার—যাতে পরবর্তীতে আফসোস না থাকে যে বলা হয়নি।
+                    </p>
+                    <p class="message-paragraph fade-in delay-4">
+                        তোমার প্রতি এক অদ্ভুত টান অনুভব করি—নাম দেওয়া যায় না, কিন্তু প্রতিটা মুহূর্তে তার অস্তিত্ব টের পাই। এই অনুভূতিটা ঠিক কবে থেকে, কীভাবে – সেটা হয়তো বলা যায় না, কিন্তু প্রতিবার তোমাকে দেখলে, কথা বললে কিংবা নিঃশব্দে তোমার কথা ভাবলে মনে হয়—এই ভালো লাগা শুধু একটা মুহূর্তের নয়, এটা যেন সময়কে ছুঁয়ে থাকা এক শান্ত কোমল স্রোত।
+                    </p>
+                    <p class="message-paragraph fade-in delay-4">
+                        তোমার সাথে জড়িয়ে থাকা ছোট ছোট মুহূর্তগুলো – হোক তা দেখা না-দেখা, বলা না-বলা – আমার ভেতর এক রকম আলো রেখে যায়। সেগুলোই একদিন স্মৃতির পাতায় স্নিগ্ধ এক গল্প হয়ে থাকবে।
+                    </p>
+                    <p class="message-paragraph fade-in delay-4">
+                        গোবিন্দ যদি কোনো এক নিস্তব্ধ বিকেলে লিখে রাখেন—যেখানে আমরা এক আকাশের নিচে বসে একসাথে বসে—তাহলে সেদিন নিশ্চয়ই মন খুলে তোমাকে জানাবো আরও অনেক অপ্রকাশিত কথা, যা আজ শুধু হৃদয়ের গোপন কোণে জমে আছে।
+                    </p>
+                    
+                    <div class="quote fade-in delay-5">
+                        "জন্মদিন শুধু একটি দিন নয়, এটি মহাবিশ্বের তোমাকে স্মরণ করার দিন।"
+                    </div>
+                    
+                    <p class="message-paragraph fade-in delay-5">
+                        আবারও তোমাকে জানাই হৃদয়ের গভীর থেকে অজস্র শুভেচ্ছা।
+                        তোমার জীবনের প্রতিটি দিন আশায়, ভালোবাসায়, নতুন স্বপ্নে ভরে ওঠোক। তোমার পথচলা হোক সফল, জীবন হোক সুন্দর ও অর্থপূর্ণ। আর তোমার প্রতিটি সময় হোক আলোয় পরিপূর্ণ। 
+                        <span style="font-size: 1.5rem;">💖</span>
+                    </p>
+                    
+                    <div class="signature fade-in delay-5">— পার্থ</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const envelope = document.getElementById('envelope');
+            envelope.addEventListener('click', function() {
+                this.classList.toggle('open');
+            });
+            
+            const heartsContainer = document.getElementById('hearts');
+            const heartIcons = ['❤️', '💖', '💗', '💓', '💘', '💝', '💞'];
+            
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                const duration = (Math.random() * 3 + 3); 
+                const delay = Math.random() * 2; 
+                heart.style.animationDuration = duration + 's';
+                heart.style.animationDelay = delay + 's';
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, (duration + delay + 0.1) * 1000); 
+            }
+            
+            for (let i = 0; i < 20; i++) { 
+                setTimeout(createHeart, i * 150); 
+            }
+            
+            setInterval(createHeart, 300); 
+
+            // Fade-in animations are primarily CSS-driven.
+            // Scroll check logic can be enhanced if specific scroll-triggered highlights are needed beyond :active state.
+            const fadeElements = document.querySelectorAll('.fade-in');
+            function checkScroll() {
+                // This is a general structure. For the current request, CSS :active is handling touch feedback.
+                // If you need elements to highlight as they scroll into view (passively),
+                // this is where you'd use Intersection Observer.
+            }
+            window.addEventListener('load', checkScroll);
+            window.addEventListener('scroll', checkScroll);
+            checkScroll();
+        });
+    </script>
 </body>
 </html>
